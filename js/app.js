@@ -5,7 +5,6 @@
   const fullscreenToggle = document.querySelector('.fullscreen-toggle');
   const container = document.querySelector('.slides-container');
   const chapterPill = document.querySelector('.chapter-pill');
-  const slideMiniTitle = document.querySelector('.slide-mini-title');
   const teacherPanelText = document.querySelector('.teacher-panel-text');
   const currentSlideEl = document.querySelector('.current-slide');
   const totalSlidesEl = document.querySelector('.total-slides');
@@ -47,7 +46,6 @@
     currentSlideEl.textContent = String(current + 1);
     totalSlidesEl.textContent = String(total);
     chapterPill.textContent = getChapterLabel(current);
-    slideMiniTitle.textContent = getCurrentTitle(current);
     teacherPanelText.textContent = getCurrentHint(current);
 
     document.querySelector('.nav-prev').style.visibility = current === 0 ? 'hidden' : 'visible';
