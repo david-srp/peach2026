@@ -2,519 +2,261 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>小小AI探险家 — 桃子小三班</title>
-
-  <!-- Reveal.js CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
-  <!-- Custom Theme -->
-  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/theme.css?v=20260323b">
 </head>
 <body>
 
-<!-- Teacher Hint Toggle -->
-<button id="teacher-hint-toggle" aria-pressed="false" title="显示老师提示">
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-</button>
+<!-- Portrait orientation overlay -->
+<div class="orientation-overlay">
+  <div class="rotate-icon"></div>
+  <div class="orientation-text">请横屏查看 📱↔️</div>
+</div>
 
-<!-- Navigation Arrows -->
-<button class="nav-arrow left" onclick="Reveal.prev()" aria-label="上一页">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-</button>
-<button class="nav-arrow right" onclick="Reveal.next()" aria-label="下一页">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-</button>
+<!-- Top HUD -->
+<div class="top-hud">
+  <div class="chapter-pill">暖场</div>
+  <div class="slide-mini-title">小小AI探险家 🌟</div>
+</div>
 
-<div class="reveal">
-  <div class="slides">
+<!-- Click zones -->
+<button class="tap-zone tap-prev" aria-label="上一页"></button>
+<button class="tap-zone tap-next" aria-label="下一页"></button>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 1: Cover -->
-    <!-- ============================================================ -->
-    <section class="cover-slide">
-      <h1 class="fragment anim-bounce">小小AI探险家</h1>
-      <div class="illustration-placeholder orange fragment anim-slide-l anim-d2">
-        封面：豆包+Austin 手拉手站在彩虹下
-      </div>
-      <div class="teacher-hint">—</div>
-    </section>
+<!-- Floating nav arrows -->
+<button class="nav-arrow nav-prev" aria-label="上一页">&#9664;</button>
+<button class="nav-arrow nav-next" aria-label="下一页">&#9654;</button>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 2 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">你有好朋友吗？</p>
-      <div class="illustration-placeholder blue fragment anim-bounce anim-d2">
-        几个小朋友手拉手在草地上
-      </div>
-      <div class="teacher-hint">等孩子回应，建立互动氛围</div>
-    </section>
+<!-- Progress bar -->
+<div class="progress-bar"></div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 3 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">今天认识一个新朋友——豆包！</p>
-      <div class="illustration-placeholder golden fragment anim-bounce anim-d2">
-        豆包角色大图登场，周围有星星
-      </div>
-      <div class="teacher-hint">拿出平板展示</div>
-    </section>
+<!-- Bottom control dock -->
+<div class="control-dock">
+  <button class="dock-btn hint-toggle" title="显示老师提示">提示</button>
+  <button class="dock-btn dock-prev" title="上一页">上一页</button>
+  <div class="slide-counter"><span class="current-slide">1</span><span class="counter-sep">/</span><span class="total-slides">36</span></div>
+  <button class="dock-btn dock-next" title="下一页">下一页</button>
+  <button class="dock-btn fullscreen-toggle" title="全屏播放">全屏</button>
+</div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 4 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">它住在平板里，<br>有超级聪明的大脑！</p>
-      <div class="illustration-placeholder lavender fragment anim-bounce anim-d2">
-        可爱平板插图，里面冒出豆包，周围有齿轮和灯泡
-      </div>
-      <div class="teacher-hint">跟我们不一样，没有手没有脚，但什么问题都能回答</div>
-    </section>
+<!-- Teacher hint panel -->
+<div class="teacher-panel" aria-live="polite">
+  <div class="teacher-panel-label">老师小提示</div>
+  <div class="teacher-panel-text">这一页没有额外提示～</div>
+</div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 5 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">它有时也会答错哦～</p>
-      <div class="illustration-placeholder mint fragment anim-bounce anim-d2">
-        豆包挠头，脸上有问号，可爱表情
-      </div>
-      <div class="teacher-hint">就像小朋友有时候也会答错问题一样</div>
-    </section>
+<!-- Swipe helper -->
+<div class="swipe-tip">左右轻扫或轻点屏幕两侧翻页</div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 6: Chapter 2 Title -->
-    <!-- ============================================================ -->
-    <section class="chapter-title">
-      <p class="chapter-num fragment anim-fade-up">第二章</p>
-      <h2 class="fragment anim-bounce anim-d2">好奇心大爆发</h2>
-      <div class="illustration-placeholder blue fragment anim-fade-up anim-d3" style="width:50%;">
-        Austin举手，周围飘着问号泡泡
-      </div>
-      <div class="teacher-hint">—</div>
-    </section>
+<!-- Slides -->
+<div class="slides-container">
 
-    <!-- ============================================================ -->
-    <!-- PAGE 7 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">恐龙最喜欢吃什么？</p>
-      <div class="illustration-placeholder orange fragment anim-bounce anim-d2">
-        一只可爱的恐龙在吃树叶，旁边有肉
-      </div>
-      <div class="teacher-hint">豆包会说草食/肉食恐龙的区别</div>
-    </section>
+  <!-- COVER -->
+  <div class="slide" data-bg="public/images/cover.png">
+    <div class="slide-text-area"><div class="slide-text">小小AI探险家 🌟</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 8 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">为什么天会下雨？</p>
-      <div class="illustration-placeholder blue fragment anim-drop anim-d2">
-        可爱的云朵在微笑着下雨，下面有小花打伞
-      </div>
-      <div class="teacher-hint">用简单语言解释水循环</div>
-    </section>
+  <!-- CH1: 认识新朋友 -->
+  <div class="slide" data-bg="public/images/ch1-friends.png">
+    <div class="teacher-hint">等孩子回应，建立互动氛围</div>
+    <div class="slide-text-area"><div class="slide-text">你有好朋友吗？</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 9 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">月亮上面住着谁？</p>
-      <div class="illustration-placeholder golden fragment anim-fade-up anim-d2" style="opacity:0;">
-        月亮上有嫦娥和玉兔的剪影，带童话感
-      </div>
-      <div class="teacher-hint">可能会说没有人住，但以前人们以为有嫦娥</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch1-meet-doubao.png">
+    <div class="teacher-hint">拿出平板展示豆包APP</div>
+    <div class="slide-text-area"><div class="slide-text">今天认识一个新朋友——豆包！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 10 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-bounce">轮到你们啦！<br>什么都可以问！</p>
-      <div class="illustration-placeholder mint fragment anim-bounce anim-d2">
-        Austin 兴奋举手，豆包竖着耳朵听
-      </div>
-      <div class="teacher-hint">如果冷场：你们知道大象鼻子为什么那么长吗？</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch1-tablet.png">
+    <div class="teacher-hint">没有手没有脚，但什么问题都能回答</div>
+    <div class="slide-text-area"><div class="slide-text">它住在平板里，有超级聪明的大脑！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 11 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">还能问这些哦！</p>
-      <div class="card-grid fragment anim-d2">
-        <div class="card orange fragment anim-flip anim-d1">企鹅会飞吗？</div>
-        <div class="card blue fragment anim-flip anim-d2">吃冰淇淋牙为什么疼？</div>
-        <div class="card golden fragment anim-flip anim-d3">鱼会睡觉吗？</div>
-        <div class="card mint fragment anim-flip anim-d4">蚂蚁怎么搬那么重的东西？</div>
-      </div>
-      <div class="teacher-hint">备用问题池，按需使用</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch1-wrong.png">
+    <div class="teacher-hint">就像小朋友有时候也会答错问题一样</div>
+    <div class="slide-text-area"><div class="slide-text">它有时也会答错哦～</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 12: Chapter 3 Title -->
-    <!-- ============================================================ -->
-    <section class="chapter-title">
-      <p class="chapter-num fragment anim-fade-up">第三章</p>
-      <h2 class="fragment anim-bounce anim-d2">一起编故事</h2>
-      <div class="illustration-placeholder golden fragment anim-fade-up anim-d3" style="width:50%;">
-        豆包+Austin坐在大书本上
-      </div>
-      <div class="teacher-hint">—</div>
-    </section>
+  <!-- CH2: 好奇心大爆发 -->
+  <div class="slide chapter-title" data-bg="public/images/ch2-title.png">
+    <div class="slide-text-area"><div class="slide-text">我们来问问题！❓</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 13 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">从前有一只小兔子……</p>
-      <div class="illustration-placeholder mint fragment anim-slide-r anim-d2">
-        可爱小兔子在森林小路上走，背景是魔法森林
-      </div>
-      <div class="teacher-hint">在森林里走啊走</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch2-dinosaur.png">
+    <div class="teacher-hint">豆包会说草食/肉食恐龙的区别</div>
+    <div class="slide-text-area"><div class="slide-text">恐龙最喜欢吃什么？🦕</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 14 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">它发现了闪闪发光的东西！<br>是什么呢？</p>
-      <div class="illustration-placeholder golden fragment anim-pulse anim-d2 anim-glow">
-        神秘的金色光芒从草丛中透出，兔子惊喜回头
-      </div>
-      <div class="teacher-hint">让孩子回答：宝石？星星？糖果？钥匙？</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch2-rain.png">
+    <div class="teacher-hint">用简单语言解释水循环</div>
+    <div class="slide-text-area"><div class="slide-text">为什么天会下雨？🌧️</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 15 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">豆包帮我们接着讲！</p>
-      <div class="illustration-placeholder lavender fragment anim-bounce anim-d2">
-        豆包化身讲故事姿态，旁边有故事泡泡
-      </div>
-      <div class="teacher-hint">此时切到豆包APP实时演示。Prompt加"3-5句话讲完"</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch2-moon.png">
+    <div class="teacher-hint">可能会说没有人住，但以前人们以为有嫦娥</div>
+    <div class="slide-text-area"><div class="slide-text">月亮上面住着谁？🌙</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 16 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">换一个故事开头？</p>
-      <div class="card-grid cols-3 fragment anim-d2">
-        <div class="card lavender fragment anim-flip anim-d1">小猫咪迷路了……</div>
-        <div class="card golden fragment anim-flip anim-d2">星星掉下来一颗……</div>
-        <div class="card mint fragment anim-flip anim-d3">会说话的礼物……</div>
-      </div>
-      <div class="teacher-hint">备选故事开头，按需使用</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch2-your-turn.png">
+    <div class="teacher-hint">如果冷场：你们知道大象鼻子为什么那么长吗？</div>
+    <div class="slide-text-area"><div class="slide-text">轮到你们啦！什么都可以问！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 17: Chapter 4 Title -->
-    <!-- ============================================================ -->
-    <section class="chapter-title">
-      <p class="chapter-num fragment anim-fade-up">第四章</p>
-      <h2 class="fragment anim-bounce anim-d2">让豆包画画</h2>
-      <div class="illustration-placeholder orange fragment anim-fade-up anim-d3" style="width:50%;">
-        豆包拿着画笔，面前有画布
-      </div>
-      <div class="teacher-hint">—</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch2-more-questions.png">
+    <div class="teacher-hint">备用问题池，按需使用</div>
+    <div class="slide-text-area"><div class="slide-text">还能问这些哦！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 18 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">"画一只猫"</p>
-      <div class="illustration-placeholder cream-dark fragment anim-fade-up anim-d2">
-        一只非常简单/普通的猫咪线稿
-      </div>
-      <p class="sub-text fragment anim-fade-up anim-d3">说得少，结果普通……</p>
-      <div class="teacher-hint">第一轮说得少，结果普通</div>
-    </section>
+  <!-- CH3: 一起来编故事 -->
+  <div class="slide chapter-title" data-bg="public/images/ch3-title.png">
+    <div class="slide-text-area"><div class="slide-text">一起来编故事！📖</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 19 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">"橘色的小猫，戴蓝色魔法帽，<br>坐在大蘑菇上！"</p>
-      <div class="illustration-placeholder orange fragment anim-bounce anim-d2">
-        精美的橘猫戴魔法帽坐蘑菇，蝴蝶围绕，色彩丰富
-      </div>
-      <p class="sub-text fragment anim-fade-up anim-d3">说得多，结果惊艳！</p>
-      <div class="teacher-hint">第二轮说得多，结果惊艳！强调对比</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch3-rabbit.png">
+    <div class="teacher-hint">在森林里走啊走</div>
+    <div class="slide-text-area"><div class="slide-text">从前有一只小兔子……</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 20 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">说得越清楚，画得越好看！</p>
-      <div class="compare-layout">
-        <div class="side fragment anim-slide-l" style="background:var(--cream-dark); border-radius:20px;">简单猫咪</div>
-        <div class="arrow fragment anim-bounce anim-d2">→</div>
-        <div class="side fragment anim-slide-r anim-d3" style="background:linear-gradient(135deg, var(--orange), var(--golden)); color:#fff; border-radius:20px;">精美魔法猫</div>
-      </div>
-      <div class="teacher-hint">核心教学点：什么颜色、在做什么、在哪里</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch3-glow.png">
+    <div class="teacher-hint">让孩子回答：宝石？星星？糖果？钥匙？</div>
+    <div class="slide-text-area"><div class="slide-text">它发现了闪闪发光的东西！是什么呢？</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 21 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-bounce">轮到你们啦！</p>
-      <div class="illustration-placeholder blue fragment anim-pulse anim-d2 anim-glow">
-        Austin 兴奋地指向空白画布，画布在闪烁
-      </div>
-      <div class="teacher-hint">追问框架：什么颜色？在做什么？在哪里？</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch3-storytelling.png">
+    <div class="teacher-hint">切到豆包APP实时演示。Prompt加'3-5句话讲完'</div>
+    <div class="slide-text-area"><div class="slide-text">豆包帮我们接着讲！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 22 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">什么颜色？在做什么？在哪里？</p>
-      <div class="icon-row">
-        <div class="icon-item fragment anim-bounce anim-d1">
-          <div class="icon-circle" style="background: var(--orange);">🎨</div>
-          <span class="icon-label">颜色</span>
-        </div>
-        <div class="icon-item fragment anim-bounce anim-d2">
-          <div class="icon-circle" style="background: var(--sky-blue);">🏃</div>
-          <span class="icon-label">动作</span>
-        </div>
-        <div class="icon-item fragment anim-bounce anim-d3">
-          <div class="icon-circle" style="background: var(--mint);">📍</div>
-          <span class="icon-label">地点</span>
-        </div>
-      </div>
-      <div class="teacher-hint">引导孩子把模糊描述变清晰</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch3-more-stories.png">
+    <div class="teacher-hint">备选故事开头，按需使用</div>
+    <div class="slide-text-area"><div class="slide-text">换一个故事开头？</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 23 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">看看这些超酷的画！</p>
-      <div class="card-grid">
-        <div class="card orange fragment anim-flip anim-d1">企鹅围巾看星星</div>
-        <div class="card blue fragment anim-flip anim-d2">飞象青蛙过彩虹</div>
-        <div class="card golden fragment anim-flip anim-d3">糖果屋</div>
-        <div class="card lavender fragment anim-flip anim-d4">恐龙做蛋糕</div>
-      </div>
-      <div class="teacher-hint">备用精彩画面，激发灵感</div>
-    </section>
+  <!-- CH4: 豆包会画画 -->
+  <div class="slide chapter-title" data-bg="public/images/ch4-title.png">
+    <div class="slide-text-area"><div class="slide-text">豆包会画画！🎨</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 24: Chapter 5 Title -->
-    <!-- ============================================================ -->
-    <section class="chapter-title">
-      <p class="chapter-num fragment anim-fade-up">第五章</p>
-      <h2 class="fragment anim-bounce anim-d2">梦想小导演</h2>
-      <div class="illustration-placeholder golden fragment anim-shake anim-d3" style="width:50%;">
-        画框里的画跳出来活了，豆包惊喜表情
-      </div>
-      <p class="sub-text fragment anim-fade-up anim-d4" style="color:#fff;">画会动了！！</p>
-      <div class="teacher-hint">过渡：豆包还有一个超级魔法——把话变成会动的视频</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch4-simple-cat.png">
+    <div class="teacher-hint">第一轮说得少，结果普通</div>
+    <div class="slide-text-area"><div class="slide-text">画一只猫</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 25 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">鱼只能在水里游？才不是！</p>
-      <div class="compare-layout">
-        <div class="side fragment anim-fade-up" style="background: var(--sky-blue); border-radius:20px; color:var(--indigo);">
-          鱼在水里游（普通）
-        </div>
-        <div class="arrow fragment anim-bounce anim-d2">→</div>
-        <div class="side fragment anim-flip anim-d3" style="border-radius:20px; overflow:hidden; padding:0;">
-          <div class="video-placeholder" style="width:100%; border-radius:20px;">
-            <div class="play-btn"></div>
-            <span class="video-label">鱼飞上天 · 视频稍后更新</span>
-            <video src="" style="display:none;"></video>
-          </div>
-        </div>
-      </div>
-      <div class="teacher-hint">先问可能吗？不可能！再翻转惊喜</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch4-fancy-cat.png">
+    <div class="teacher-hint">第二轮说得多，结果惊艳！</div>
+    <div class="slide-text-area"><div class="slide-text">橘色小猫，戴蓝色魔法帽，坐在大蘑菇上！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 26 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">猫不会开车？看这个！</p>
-      <div class="compare-layout">
-        <div class="side fragment anim-fade-up" style="background: var(--mint); border-radius:20px; color:var(--indigo);">
-          猫走路（普通）
-        </div>
-        <div class="arrow fragment anim-bounce anim-d2">→</div>
-        <div class="side fragment anim-flip anim-d3" style="border-radius:20px; overflow:hidden; padding:0;">
-          <div class="video-placeholder" style="width:100%; border-radius:20px;">
-            <div class="play-btn"></div>
-            <span class="video-label">猫开车兜风 · 视频稍后更新</span>
-            <video src="" style="display:none;"></video>
-          </div>
-        </div>
-      </div>
-      <div class="teacher-hint">连续惊喜，快节奏</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch4-compare.png">
+    <div class="teacher-hint">核心教学点：什么颜色、在做什么、在哪里</div>
+    <div class="slide-text-area"><div class="slide-text">说得越清楚，画得越好看！✨</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 27 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">恐龙不在了？它来了！</p>
-      <div class="compare-layout">
-        <div class="side fragment anim-fade-up" style="background: var(--golden); border-radius:20px; color:var(--indigo);">
-          恐龙化石（普通）
-        </div>
-        <div class="arrow fragment anim-bounce anim-d2">→</div>
-        <div class="side fragment anim-flip anim-d3" style="border-radius:20px; overflow:hidden; padding:0;">
-          <div class="video-placeholder" style="width:100%; border-radius:20px;">
-            <div class="play-btn"></div>
-            <span class="video-label">恐龙走进教室 · 视频稍后更新</span>
-            <video src="" style="display:none;"></video>
-          </div>
-        </div>
-      </div>
-      <div class="teacher-hint">连续惊喜</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch4-your-turn.png">
+    <div class="teacher-hint">追问框架：什么颜色？在做什么？在哪里？</div>
+    <div class="slide-text-area"><div class="slide-text">轮到你们啦！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 28 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">老师来试一个！</p>
-      <div class="video-placeholder fragment anim-bounce anim-d2 anim-glow">
-        <div class="play-btn"></div>
-        <span class="video-label">小恐龙背红书包走进幼儿园 · 视频稍后更新</span>
-        <video src="" style="display:none;"></video>
-      </div>
-      <div class="teacher-hint">等待时问孩子：猜猜恐龙会坐哪个位置？</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch4-framework.png">
+    <div class="teacher-hint">引导孩子把模糊描述变清晰</div>
+    <div class="slide-text-area"><div class="slide-text">什么颜色？在做什么？在哪里？</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 29 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-bounce">轮到你们啦！<br>谁？做什么？在哪里？</p>
-      <div class="illustration-placeholder orange fragment anim-shake anim-d2">
-        Austin 像小导演一样拿着导演板，背景有电影打板器
-      </div>
-      <div class="teacher-hint">核心引导：谁？做什么不可能的事？在哪里？</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch4-gallery.png">
+    <div class="teacher-hint">备用精彩画面，激发灵感</div>
+    <div class="slide-text-area"><div class="slide-text">看看这些超酷的画！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 30 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">选一个脑洞！</p>
-      <div class="card-grid cols-5 fragment anim-d2">
-        <div class="card orange fragment anim-flip anim-d1" style="font-size:0.75em;">企鹅沙漠<br>吃冰淇淋</div>
-        <div class="card blue fragment anim-flip anim-d2" style="font-size:0.75em;">大象泳池<br>跳水</div>
-        <div class="card mint fragment anim-flip anim-d3" style="font-size:0.75em;">雪人<br>逛超市</div>
-        <div class="card lavender fragment anim-flip anim-d4" style="font-size:0.75em;">牙刷<br>唱歌跳舞</div>
-        <div class="card golden fragment anim-flip anim-d5" style="font-size:0.75em;">书包飞出<br>蝴蝶</div>
-      </div>
-      <div class="teacher-hint">备用脑洞，孩子冷场时抛出来选</div>
-    </section>
+  <!-- CH5: 梦想小导演 -->
+  <div class="slide chapter-title" data-bg="public/images/ch5-title.png">
+    <div class="teacher-hint">过渡：豆包还有一个超级魔法——把话变成会动的视频</div>
+    <div class="slide-text-area"><div class="slide-text">画会动了！！🎬</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 31: Chapter 6 Title -->
-    <!-- ============================================================ -->
-    <section class="chapter-title">
-      <p class="chapter-num fragment anim-fade-up">第六章</p>
-      <h2 class="fragment anim-bounce anim-d2">四个小约定</h2>
-      <div class="illustration-placeholder lavender fragment anim-fade-up anim-d3" style="width:50%;">
-        豆包+Austin 伸出小拇指拉钩
-      </div>
-      <div class="teacher-hint">—</div>
-    </section>
+  <!-- Video slides -->
+  <div class="slide" data-bg="public/images/ch5-fish.png">
+    <div class="teacher-hint">先问可能吗？不可能！再翻转惊喜</div>
+    <div class="video-overlay">
+      <div class="play-btn"></div>
+      <div class="video-label">视频稍后更新</div>
+    </div>
+    <video src="" preload="none"></video>
+    <div class="slide-text-area"><div class="slide-text">鱼只能在水里游？才不是！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 32 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">第1个约定</p>
-      <p class="main-text fragment anim-bounce anim-d2" style="font-size:1.6em;">魔法视频是假的，<br>不能学着做！</p>
-      <div class="illustration-placeholder blue fragment anim-float anim-d3">
-        梦境泡泡：里面是飞鱼和开车猫，泡泡外有"这是梦"标志
-      </div>
-      <div class="teacher-hint">就像做梦会飞，但醒来不能真的跳下去</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch5-cat-car.png">
+    <div class="teacher-hint">连续惊喜，快节奏</div>
+    <div class="video-overlay">
+      <div class="play-btn"></div>
+      <div class="video-label">视频稍后更新</div>
+    </div>
+    <video src="" preload="none"></video>
+    <div class="slide-text-area"><div class="slide-text">猫不会开车？看这个！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 33 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">第2个约定</p>
-      <p class="main-text fragment anim-bounce anim-d2" style="font-size:1.6em;">要和爸爸妈妈一起用！</p>
-      <div class="illustration-placeholder golden fragment anim-fade-up anim-d3">
-        温馨家庭画面：爸爸妈妈和孩子一起看平板
-      </div>
-      <div class="teacher-hint">就像去游乐场也要爸爸妈妈陪着</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch5-dino-class.png">
+    <div class="teacher-hint">连续惊喜</div>
+    <div class="video-overlay">
+      <div class="play-btn"></div>
+      <div class="video-label">视频稍后更新</div>
+    </div>
+    <video src="" preload="none"></video>
+    <div class="slide-text-area"><div class="slide-text">恐龙不在了？它来了！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 34 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">第3个约定</p>
-      <p class="main-text fragment anim-bounce anim-d2" style="font-size:1.6em;">它说错了要问大人！</p>
-      <div class="illustration-placeholder mint fragment anim-bounce anim-d3">
-        豆包头上冒问号，旁边有爸爸妈妈在微笑
-      </div>
-      <div class="teacher-hint">豆包有时候也会搞错</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch5-demo.png">
+    <div class="teacher-hint">等待时问孩子：猜猜恐龙会坐哪个位置？</div>
+    <div class="video-overlay">
+      <div class="play-btn"></div>
+      <div class="video-label">视频稍后更新</div>
+    </div>
+    <video src="" preload="none"></video>
+    <div class="slide-text-area"><div class="slide-text">老师来试一个！</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 35 -->
-    <!-- ============================================================ -->
-    <section>
-      <p class="main-text fragment anim-fade-up">第4个约定</p>
-      <p class="main-text fragment anim-bounce anim-d2" style="font-size:1.6em;">玩一会儿就休息！</p>
-      <div class="illustration-placeholder orange fragment anim-fade-up anim-d3">
-        孩子们在户外草地奔跑，阳光明媚
-      </div>
-      <div class="teacher-hint">看屏幕太久眼睛会累</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch5-your-turn.png">
+    <div class="teacher-hint">核心引导：谁？做什么不可能的事？在哪里？</div>
+    <div class="slide-text-area"><div class="slide-text">轮到你们啦！谁？做什么？在哪里？</div></div>
+  </div>
 
-    <!-- ============================================================ -->
-    <!-- PAGE 36: Ending -->
-    <!-- ============================================================ -->
-    <section class="ending-slide">
-      <h1 class="fragment anim-bounce">下次再见！</h1>
-      <div class="illustration-placeholder golden fragment anim-fade-up anim-d2">
-        豆包+Austin 挥手，周围有彩色气球和星星
-      </div>
-      <p class="sub-text fragment anim-fade-up anim-d3" style="color:#fff;">桃子小三班 · 小小AI探险家</p>
-      <div class="teacher-hint">—</div>
-    </section>
+  <div class="slide" data-bg="public/images/ch5-ideas.png">
+    <div class="teacher-hint">备用脑洞，孩子冷场时抛出来选</div>
+    <div class="slide-text-area"><div class="slide-text">选一个脑洞！</div></div>
+  </div>
 
-  </div><!-- .slides -->
-</div><!-- .reveal -->
+  <!-- CH6: 四个小约定 -->
+  <div class="slide chapter-title" data-bg="public/images/ch6-title.png">
+    <div class="slide-text-area"><div class="slide-text">约定时间到！🤝</div></div>
+  </div>
 
-<!-- Reveal.js CDN -->
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
-<script>
-  Reveal.initialize({
-    hash: true,
-    progress: true,
-    controls: false,       // We use custom nav arrows
-    touch: true,
-    keyboard: true,
-    loop: false,
-    transition: 'slide',
-    transitionSpeed: 'default',
-    backgroundTransition: 'fade',
-    width: 1280,
-    height: 720,
-    margin: 0.04,
-  });
-</script>
-<script src="js/teacher-hints.js"></script>
+  <div class="slide" data-bg="public/images/ch6-dream.png">
+    <div class="teacher-hint">就像做梦会飞，但醒来不能真的跳下去</div>
+    <div class="slide-text-area"><div class="slide-text">第1个：魔法视频是假的，不能学着做！</div></div>
+  </div>
+
+  <div class="slide" data-bg="public/images/ch6-family.png">
+    <div class="teacher-hint">就像去游乐场也要爸爸妈妈陪着</div>
+    <div class="slide-text-area"><div class="slide-text">第2个：要和爸爸妈妈一起用！</div></div>
+  </div>
+
+  <div class="slide" data-bg="public/images/ch6-check.png">
+    <div class="teacher-hint">豆包有时候也会搞错</div>
+    <div class="slide-text-area"><div class="slide-text">第3个：它说错了要问大人！</div></div>
+  </div>
+
+  <div class="slide" data-bg="public/images/ch6-rest.png">
+    <div class="teacher-hint">看屏幕太久眼睛会累</div>
+    <div class="slide-text-area"><div class="slide-text">第4个：玩一会儿就休息！</div></div>
+  </div>
+
+  <!-- ENDING -->
+  <div class="slide" data-bg="public/images/ending.png">
+    <div class="slide-text-area"><div class="slide-text">下次再见！👋</div></div>
+  </div>
+
+</div>
+
+<script src="js/app.js?v=20260323b"></script>
 </body>
 </html>
