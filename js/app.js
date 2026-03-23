@@ -14,32 +14,34 @@
   let current = 0;
   let hintsVisible = false;
 
+  // Chapter ranges — end index is inclusive
   const chapterRanges = [
     { end: 0, label: '暖场' },
     { end: 4, label: '第1章 · 认识豆包' },
     { end: 10, label: '第2章 · 好奇心发射' },
     { end: 15, label: '第3章 · 编故事' },
     { end: 22, label: '第4章 · AI画画' },
-    { end: 28, label: '第5章 · AI视频' },
-    { end: 33, label: '第6章 · 安全约定' },
-    { end: 34, label: '结尾' }
+    { end: 29, label: '第5章 · 梦想小导演' },
+    { end: 34, label: '第6章 · 安全约定' },
+    { end: 35, label: '结尾' }
   ];
 
   function getChapterLabel(index) {
-    const match = chapterRanges.find(function (item) { return index <= item.end; });
+    var match = chapterRanges.find(function (item) { return index <= item.end; });
     return match ? match.label : '绘本';
   }
 
   function getCurrentHint(index) {
-    const hint = slides[index].querySelector('.teacher-hint');
+    var hint = slides[index].querySelector('.teacher-hint');
     return hint ? hint.textContent.trim() : '这一页没有额外提示～';
   }
 
   function getCurrentTitle(index) {
-    const text = slides[index].querySelector('.slide-text');
+    var text = slides[index].querySelector('.slide-text');
     return text ? text.textContent.trim() : '互动绘本';
   }
 
+  // ====== #1 FIX: updateUi always syncs HUD to current slide ======
   function updateUi() {
     progressBar.style.width = (((current + 1) / total) * 100) + '%';
     currentSlideEl.textContent = String(current + 1);
@@ -55,7 +57,8 @@
   }
 
   function goTo(index) {
-    if (index < 0 || index >= total || index === current) return;
+    if (index < 0 || index >= total) return;
+    if (index === current) { updateUi(); return; }
     slides[current].classList.remove('active');
     current = index;
     slides[current].classList.add('active');
@@ -85,7 +88,7 @@
   }
 
   function syncFullscreenState() {
-    const active = Boolean(document.fullscreenElement);
+    var active = Boolean(document.fullscreenElement);
     fullscreenToggle.classList.toggle('active', active);
     fullscreenToggle.textContent = active ? '退出全屏' : '全屏';
     fullscreenToggle.title = active ? '退出全屏' : '全屏播放';
@@ -95,6 +98,29 @@
     return target.closest('.control-dock, .top-hud, .teacher-panel, .nav-arrow, .video-overlay');
   }
 
+  // ====== #4 FIX: video placeholder click → toast ======
+  function showToast(msg) {
+    var existing = document.querySelector('.toast-msg');
+    if (existing) existing.remove();
+    var el = document.createElement('div');
+    el.className = 'toast-msg';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    requestAnimationFrame(function () { el.classList.add('show'); });
+    setTimeout(function () {
+      el.classList.remove('show');
+      setTimeout(function () { el.remove(); }, 300);
+    }, 2000);
+  }
+
+  document.querySelectorAll('.video-overlay .play-btn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      showToast('🎬 视频还在准备中，敬请期待～');
+    });
+  });
+
+  // Keyboard navigation
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight' || e.key === ' ') {
       e.preventDefault();
@@ -114,6 +140,7 @@
     }
   });
 
+  // Navigation buttons
   document.querySelector('.nav-prev').addEventListener('click', prev);
   document.querySelector('.nav-next').addEventListener('click', next);
   document.querySelector('.dock-prev').addEventListener('click', prev);
@@ -127,8 +154,9 @@
     next();
   });
 
-  let touchStartX = 0;
-  let touchStartY = 0;
+  // Touch swipe
+  var touchStartX = 0;
+  var touchStartY = 0;
 
   container.addEventListener('touchstart', function (e) {
     touchStartX = e.changedTouches[0].clientX;
@@ -136,8 +164,8 @@
   }, { passive: true });
 
   container.addEventListener('touchend', function (e) {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
       if (dx < 0) next(); else prev();
     }
@@ -147,13 +175,14 @@
   fullscreenToggle.addEventListener('click', toggleFullscreen);
   document.addEventListener('fullscreenchange', syncFullscreenState);
 
+  // Background image loading
   slides.forEach(function (slide) {
-    const src = slide.dataset.bg;
+    var src = slide.dataset.bg;
     if (!src) {
       slide.classList.add('no-image');
       return;
     }
-    const img = new Image();
+    var img = new Image();
     img.onload = function () {
       slide.style.backgroundImage = 'url(' + src + ')';
       slide.classList.remove('no-image');
@@ -165,6 +194,7 @@
     img.src = src;
   });
 
+  // First-time helper tip
   function showHelperOnce() {
     if (sessionStorage.getItem('peach2026-helper-shown')) return;
     swipeTip.classList.remove('show');
@@ -173,6 +203,7 @@
     sessionStorage.setItem('peach2026-helper-shown', '1');
   }
 
+  // Init
   slides[0].classList.add('active');
   updateUi();
   syncFullscreenState();
